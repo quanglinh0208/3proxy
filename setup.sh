@@ -39,11 +39,11 @@ nscache 65536
 timeouts 1 5 30 60 180 1800 15 60
 setgid 65535
 setuid 65535
-stacksize 6291456
+stacksize 6291456 
 flush
 auth strong
 
-users ${PROXY_USER}:CL:${PROXY_PASSWORD}
+users $(awk -F "/" 'BEGIN{ORS="";} {print $1 ":CL:" $2 " "}' ${WORKDATA})
 
 $(awk -F "/" '{print "auth strong\n" \
 "allow " $1 "\n" \
@@ -62,16 +62,15 @@ gen_proxy_user() {
     echo "${PROXY_USER}" >proxy_user.txt
 	echo "${PROXY_PASSWORD}" >proxy_password.txt
 }
-
 gen_data() {
     seq $FIRST_PORT $LAST_PORT | while read port; do
-        echo "${PROXY_USER}/${PROXY_PASSWORD}/$IP4/$port/$(gen64 $IP6)"
+        echo "$(random)/$(random)/$IP4/$port/$(gen64 $IP6)"
     done
 }
 
 gen_iptables() {
     cat <<EOF
-    $(awk -F "/" '{print "iptables -I INPUT -p tcp --dport " $4 "  -m state --state NEW -j ACCEPT"}' ${WORKDATA})
+    $(awk -F "/" '{print "iptables -I INPUT -p tcp --dport " $4 "  -m state --state NEW -j ACCEPT"}' ${WORKDATA}) 
 EOF
 }
 
@@ -95,13 +94,9 @@ IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
-FIRST_PORT=22000
-LAST_PORT=22500
+FIRST_PORT=21000
+LAST_PORT=22000
 
-echo "Proxy User?"
-read PROXY_USER
-echo "Proxy Password?"
-read PROXY_PASSWORD
 
 gen_proxy_user
 gen_data >$WORKDIR/data.txt
@@ -121,7 +116,5 @@ EOF
 bash /etc/rc.local
 
 gen_proxy_file_for_user
-
-upload_proxy
 
 echo "Starting Proxy"
