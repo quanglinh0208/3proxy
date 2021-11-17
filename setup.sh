@@ -80,12 +80,12 @@ $(awk -F "/" '{print "ifconfig eth0 inet6 add " $5 "/64"}' ${WORKDATA})
 EOF
 }
 echo "installing apps"
-yum -y install gcc net-tools bsdtar zip >/dev/null
+apt -y install gcc net-tools bsdtar zip >/dev/null
 
 install_3proxy
 
-echo "working folder = /home/proxy-installer"
-WORKDIR="/home/proxy-installer"
+echo "working folder = /home/bkns"
+WORKDIR="/home/bkns"
 WORKDATA="${WORKDIR}/data.txt"
 mkdir $WORKDIR && cd $_
 
@@ -94,8 +94,8 @@ IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
-FIRST_PORT=21000
-LAST_PORT=22000
+FIRST_PORT=20000
+LAST_PORT=21000
 
 
 gen_proxy_user
@@ -118,3 +118,4 @@ bash /etc/rc.local
 gen_proxy_file_for_user
 
 echo "Starting Proxy"
+
