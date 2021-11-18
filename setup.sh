@@ -95,7 +95,7 @@ IP6=$(curl -6 -s icanhazip.com | cut -f1-4 -d':')
 echo "Internal ip = ${IP4}. Exteranl sub for ip6 = ${IP6}"
 
 FIRST_PORT=20000
-LAST_PORT=21000
+LAST_PORT=22500
 
 
 gen_proxy_user
@@ -118,4 +118,3 @@ bash /etc/rc.local
 gen_proxy_file_for_user
 
 echo "Starting Proxy"
-
