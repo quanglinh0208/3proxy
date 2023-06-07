@@ -2,7 +2,7 @@
 
 IPC=$(curl -4 -s icanhazip.com | cut -d"." -f3)
 IPD=$(curl -4 -s icanhazip.com | cut -d"." -f4)
-INT= $(ls /sys/class/net | grep e)
+INT=$(ls /sys/class/net | grep e)
 if [ "$IPC" = "4" ]; then
     IPV6_ADDRESS="2403:6a40:0:40::$IPD:0000"
     PREFIX_LENGTH="64"
