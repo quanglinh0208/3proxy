@@ -6,22 +6,22 @@ INT=$(ls /sys/class/net | grep e)
 if [ "$IPC" = "4" ]; then
     IPV6_ADDRESS="2403:6a40:0:40::$IPD:0000"
     PREFIX_LENGTH="64"
-    INTERFACE= $INT
+    INTERFACE= "$INT"
     GATEWAY="2403:6a40:0:40::1"
 elif [ "$IPC" = "5" ]; then
     IPV6_ADDRESS="2403:6a40:0:41::$IPD:0000"
     PREFIX_LENGTH="64"
-    INTERFACE= $INT
+    INTERFACE= "$INT"
     GATEWAY="2403:6a40:0:41::1"
 elif [ "$IPC" = "244" ]; then
     IPV6_ADDRESS="2403:6a40:2000:244::$IPD:0000"
     PREFIX_LENGTH="64"
-    INTERFACE= $INT
+    INTERFACE= "$INT"
     GATEWAY="2403:6a40:2000:244::1"
 else
     IPV6_ADDRESS="2403:6a40:0:$IPC::$IPD:0000"
     PREFIX_LENGTH="64"
-    INTERFACE= $INT
+    INTERFACE= "$INT"
     GATEWAY="2403:6a40:0:$IPC::1"
 fi
 
