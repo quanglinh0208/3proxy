@@ -37,6 +37,6 @@ ip link set dev "$INTERFACE" up
 cp ipv6-ubuntu.sh /etc/ipv6-ubuntu.sh
 rm -rf ipv6-ubuntu.sh
 chmod +x /etc/ipv6-ubuntu.sh
-tee -a /etc/rc.local <<EOF
-sudo /etc/ipv6-ubuntu.sh
-EOF
+#tee -a /etc/rc.local <<EOF
+#sudo /etc/ipv6-ubuntu.sh
+#EOF
