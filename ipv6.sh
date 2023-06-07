@@ -101,16 +101,12 @@ if [ "$YUM" ]; then
 	   netplan_path="/etc/netplan/50-cloud-init.yaml"
 	   netplan_config=$(cat "$netplan_path")
 	   # Tạo đoạn cấu hình IPv6 mới
-       new_netplan_config=$(sed "/gateway4:/i \ \ \ \ \ \ \ \ \ \ \ \ - $ipv6_address" <<< "$netplan_config")
-       # cập nhật gateway ipv6
-       new_netplan_config=$(sed "/gateway4:.*/a \ \ \ \ \ \ \ \ \ \ \ \ gateway6: $gateway6_address" <<< "$new_netplan_config")
+           new_netplan_config=$(sed "/gateway4:/i \ \ \ \ \ \ \ \ \ \ \ \ - $ipv6_address" <<< "$netplan_config")
+           # cập nhật gateway ipv6
+           new_netplan_config=$(sed "/gateway4:.*/a \ \ \ \ \ \ \ \ \ \ \ \ gateway6: $gateway6_address" <<< "$new_netplan_config")
 	else
 	   echo 'Khong co card mang phu hop'
 	fi
-	# Tạo đoạn cấu hình IPv6 mới
-	
-    # cập nhật gateway ipv6
-    
 	echo "$new_netplan_config" > "$netplan_path"
 
 	# Áp dụng cấu hình Netplan
