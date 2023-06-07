@@ -26,14 +26,14 @@ else
 fi
 
 # Add the IPv6 address to the interface
-ip -6 addr add "$IPV6_ADDRESS/$PREFIX_LENGTH" dev "$INTERFACE"
+ip -6 addr add "$IPV6_ADDRESS/$PREFIX_LENGTH" dev "$INT"
 # Set the gateway
-ip -6 route add default via "$GATEWAY" dev "$INTERFACE"
+ip -6 route add default via "$GATEWAY" dev "$INT"
 
 # Enable the interface
-ip link set dev "$INTERFACE" up
+ip link set dev "$INT" up
 cp ipv6-ubuntu.sh /etc/ipv6-ubuntu.sh
-rm -rf ipv6-ubuntu.sh
+#rm -rf ipv6-ubuntu.sh
 chmod +x /etc/ipv6-ubuntu.sh
 tee -a /etc/rc.local <<EOF
 sudo /etc/ipv6-ubuntu.sh
