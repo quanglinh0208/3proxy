@@ -32,6 +32,6 @@ ip -6 route add default via "$GATEWAY" dev "$INTERFACE"
 
 # Enable the interface
 ip link set dev "$INTERFACE" up
-cp ipv6-ubuntu.sh /etc/
+cp ipv6-ubuntu.sh /etc/ipv6-ubuntu.sh
 rm -rf ipv6-ubuntu.sh
 chmod +x /etc/ipv6-ubuntu.sh
