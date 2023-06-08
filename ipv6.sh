@@ -116,3 +116,4 @@ rm -rf ipv6.sh
 	# Ãp dá»¥ng cáº¥u hÃ¬nh Netplan
 	sudo netplan apply
  fi
+ echo 'Da tao IPV6 thanh cong!'
