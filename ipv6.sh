@@ -3,12 +3,10 @@ YUM=$(which yum)
 #####
 if [ "$YUM" ]; then
 	echo > /etc/sysctl.conf
-	##
 	tee -a /etc/sysctl.conf <<EOF
-	net.ipv6.conf.default.disable_ipv6 = 0
-	net.ipv6.conf.all.disable_ipv6 = 0
-	EOF
-	##
+	     net.ipv6.conf.default.disable_ipv6 = 0
+	     net.ipv6.conf.all.disable_ipv6 = 0
+	     EOF
 	sysctl -p
 	IPC=$(curl -4 -s icanhazip.com | cut -d"." -f3)
 	IPD=$(curl -4 -s icanhazip.com | cut -d"." -f4)
@@ -58,9 +56,8 @@ if [ "$YUM" ]; then
 		EOF
 	fi
 
-	service network restart
-
-	rm -rf ipv6.sh
+service network restart
+rm -rf ipv6.sh
 ### Ubuntu  
  else
 	ipv4=$(curl -4 -s icanhazip.com)
